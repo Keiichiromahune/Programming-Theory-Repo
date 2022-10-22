@@ -43,7 +43,6 @@ public class MoveScene : MonoBehaviour
     public void SetName()
     {
         playerName = inputField.text;
-        Debug.Log(playerName);
     }
 
 }
