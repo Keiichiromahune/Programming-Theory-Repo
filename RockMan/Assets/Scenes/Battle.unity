@@ -4931,6 +4931,7 @@ MonoBehaviour:
   positionX: 0
   positionY: 0
   baster: {fileID: 6669361959454428309, guid: b7f1be491c01d4e06a04c4c7dddc1f7e, type: 3}
+  baster1: {fileID: 187555595374759221, guid: 4ea08464816f24aabb60c04fe5c5da2a, type: 3}
   playerHp: {fileID: 1801036595}
 --- !u!137 &6121954284551630908
 SkinnedMeshRenderer:

@@ -25,6 +25,7 @@ public class BattleManager : MonoBehaviour
         if (enemyLists.Count == 0 )
         {
             Debug.Log("BattleFinished");
+            GameManager.Instance.SaveInfoHPOnly();
             SceneManager.LoadScene(1);
         }
     }

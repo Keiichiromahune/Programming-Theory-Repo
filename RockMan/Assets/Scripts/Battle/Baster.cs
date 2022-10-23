@@ -7,6 +7,7 @@ public class Baster : MonoBehaviour
 
     private float speed = 30;
     public static int damage = 10;
+    public bool pentention = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +17,31 @@ public class Baster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * speed);
+        MoveBaster(speed);
+    }
 
-        if(transform.position.x > 15)
+    public virtual void MoveBaster(float velosity)
+    {
+        transform.Translate(Vector3.right * Time.deltaTime * velosity);
+
+        if (transform.position.x > 15)
         {
             Destroy(gameObject);
         }
     }
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+
+        if(!pentention)
         {
-            Destroy(gameObject);
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(gameObject);
+            }
         }
+        
     }
 }

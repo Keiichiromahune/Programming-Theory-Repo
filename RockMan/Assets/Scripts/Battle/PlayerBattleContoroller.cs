@@ -14,6 +14,7 @@ public class PlayerBattleContoroller : MonoBehaviour
     public  float positionX;
     public  float positionY;
     public GameObject baster;
+    public GameObject baster1;
     public TMP_Text playerHp;
     private float waitTime = 0;
 
@@ -26,6 +27,8 @@ public class PlayerBattleContoroller : MonoBehaviour
 
     void Start()
     {
+        //GameManager.Instance.LoadPlayerInfo();
+        //hp = GameManager.Instance.currentHp;
         position = GetComponent<Transform>();
         transform.localPosition = new Vector3(0, 0, 0);
     }
@@ -73,6 +76,9 @@ public class PlayerBattleContoroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(baster, new Vector3(transform.position.x, 1,transform.position.z), Quaternion.identity);
+        }else if (Input.GetKeyDown(KeyCode.S))
+        {
+            Instantiate(baster1, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
         }
     }
 

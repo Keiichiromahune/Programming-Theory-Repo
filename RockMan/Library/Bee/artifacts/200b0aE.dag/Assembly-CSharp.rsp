@@ -356,6 +356,7 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Battle/Baster.cs"
+"Assets/Scripts/Battle/Baster1.cs"
 "Assets/Scripts/Battle/BattleManager.cs"
 "Assets/Scripts/Battle/Bone.cs"
 "Assets/Scripts/Battle/Cylinder.cs"

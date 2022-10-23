@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text playerNameText;
     [SerializeField] TMP_Text hp_Text;
     private Animator playerAnim;
-    private Vector3 placeNew;
+    public Vector3 placeHere;
 
     private void Awake()
     {
@@ -23,29 +23,14 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.Instance.hp == 0)
-        {
-            hp = 100;
-        }
-        else
-        {
-            hp = GameManager.Instance.hp;
-        }
-        if(GameManager.Instance.startPlace == new Vector3(0, 0, 0))
-        {
-            transform.position = new Vector3(50, 0, 0);
-        }
-        else
-        {
-            transform.position = GameManager.Instance.startPlace;
-        }
 
-        playerName = GameManager.Instance.playerName;
+        //playerName = GameManager.Instance.playerName;
         playerAnim = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        placeHere = transform.position;
         playerNameText.text = playerName;
         hp_Text.text = "HP: " + hp.ToString();
         if (Input.GetKey(KeyCode.RightArrow))
@@ -63,6 +48,7 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.CompareTag("EnemyObj"))
         {
+            GameManager.Instance.LoadPlayerInfo();
             SceneManager.LoadScene(2);
         }
 
