@@ -10,17 +10,13 @@ public class Enemy : MonoBehaviour
     public float positionY;
     public bool boolX;
     public bool boolY;
-    public static int damage;
     public TMP_Text textHP;
     public bool waitE = false;
     public float waitTIme = 0;
 
-
-
     void Start()    
     {
         hp = 100;
-        damage = 5;
     }
 
     // Update is called once per frame
@@ -76,8 +72,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
-
     public void positionSetting()
     {
         if(transform.position.z <= 4 && transform.position.z > 2)
@@ -111,6 +105,8 @@ public class Enemy : MonoBehaviour
 
 
     }
+
     
+
 
 }

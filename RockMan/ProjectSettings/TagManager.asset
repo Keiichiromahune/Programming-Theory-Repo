@@ -11,6 +11,7 @@ TagManager:
   - Cylinder
   - Oomeran
   - EnemyObj
+  - GameClear
   layers:
   - Default
   - TransparentFX

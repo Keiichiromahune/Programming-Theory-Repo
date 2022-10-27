@@ -62,8 +62,6 @@ public class Inu : Enemy
                 StartCoroutine("BoneSpawnSpam");
                 
                 Instantiate(bone, new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z), Quaternion.identity);
-
-                
             }
         }
 

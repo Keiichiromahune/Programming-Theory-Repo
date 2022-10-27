@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
-
+using UnityEngine.UI;
 public class PlayerBattleContoroller : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private int hp = 100;
+
     //private string name;
+    public int hp = GameManager.Instance.currentHp;
     private Transform position;
     public  float positionX;
     public  float positionY;
@@ -17,6 +18,7 @@ public class PlayerBattleContoroller : MonoBehaviour
     public GameObject baster1;
     public TMP_Text playerHp;
     private float waitTime = 0;
+
 
     public static PlayerBattleContoroller Instance;
 
@@ -27,6 +29,7 @@ public class PlayerBattleContoroller : MonoBehaviour
 
     void Start()
     {
+        hp = GameManager.Instance.currentHp;
         //GameManager.Instance.LoadPlayerInfo();
         //hp = GameManager.Instance.currentHp;
         position = GetComponent<Transform>();
@@ -43,8 +46,8 @@ public class PlayerBattleContoroller : MonoBehaviour
             MovePlayer();
             Baster();
         }
-
     }
+
 
     public void MovePlayer()
     {
@@ -84,21 +87,26 @@ public class PlayerBattleContoroller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
-        {
-            hp -= Enemy.damage;
+        //if (collision.collider.CompareTag("Cylinder"))
+        //{
+        //    hp -= 20;
+        //}
+            ////}else if (collision.collider.CompareTag("Bone"))
+            ////{
+            ////    hp -= 10;
+            //}else if (collision.collider.CompareTag("Cylinder"))
+            //{
+            //    hp -= Cylinder.damage;
+            //}else if (collision.collider.CompareTag("Oomeran"))
+            //{
+            //    hp -= oomerang.damage;
+            //}
 
-        }else if (collision.collider.CompareTag("Bone"))
+            IDamaged[] damageds = collision.collider.GetComponentsInChildren<IDamaged>();
+        foreach(IDamaged d in damageds)
         {
-            hp -= 10;
-        }else if (collision.collider.CompareTag("Cylinder"))
-        {
-            hp -= Cylinder.damage;
-        }else if (collision.collider.CompareTag("Oomeran"))
-        {
-            hp -= oomerang.damage;
+            d.DamageToPlayer();
         }
-            
 
     }
 }

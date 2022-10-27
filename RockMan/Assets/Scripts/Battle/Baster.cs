@@ -8,6 +8,9 @@ public class Baster : MonoBehaviour
     private float speed = 30;
     public static int damage = 10;
     public bool pentention = false;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +32,6 @@ public class Baster : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
 
     private void OnCollisionEnter(Collision collision)
     {

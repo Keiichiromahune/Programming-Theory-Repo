@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Usi : Enemy
+public class Usi : Enemy, IDamaged
 {
     public bool flg = false;
     private bool attackFlg = false;
     private Vector3 attaskStartPosi = new Vector3(11, 0, 0);
+    private int damage = 10;
 
     private void Start()
     {
         hp = 200;
-        Enemy.damage = 10;
-     
     }
     // Start is called before the first frame update
     private void Update()
@@ -76,5 +75,9 @@ public class Usi : Enemy
             }
             
         }
+    }
+    public void DamageToPlayer()
+    {
+        PlayerBattleContoroller.Instance.hp -= damage;
     }
 }

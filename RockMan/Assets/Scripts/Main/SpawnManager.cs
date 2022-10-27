@@ -14,15 +14,10 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            Spawn();
+            Invoke("Spawn", 0.5f);
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void Spawn()
     {

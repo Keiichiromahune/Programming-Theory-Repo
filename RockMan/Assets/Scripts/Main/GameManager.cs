@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+
 public class GameManager : MonoBehaviour
 {
     private MoveScene  moveScene;
@@ -10,13 +11,14 @@ public class GameManager : MonoBehaviour
 
 
     //シーン間で保持するデータを保存
-    public string playerName = "Rock";
+    public string playerName;
     public int currentHp;
     public Vector3 playerCurrentPosi;
 
     private void Awake()
     {
-        if(Instance != null)
+        LoadPlayerInfo();
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -26,46 +28,28 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        LoadPlayerInfo();
-        //JsonFileからデータを取得して保存
 
-        //消さないように、他のシーンから映ってきた時に、名前を取得
-        //moveScene = GameObject.Find("SceneManager").GetComponent<MoveScene>();
-        //platerName = moveScene.playerName;
     }
     private void Update()
     {
         playerCurrentPosi = Player.Instance.placeHere;
     }
 
-
     [System.Serializable]
-    class SaveData
+    class PlayerData
     {
-        //public string playerName;
+        public string playerName;
         public int hp;
         public Vector3 playerPos;
     }
 
-    public void SaveInfo()
+    public void SaveInfo(int currentHpData, Vector3 currentPosiData)
     {
-        SaveData data = new SaveData();
-        data.hp = currentHp;
-        data.playerPos = playerCurrentPosi;
-
-        string json = JsonUtility.ToJson(data);
-
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-
-    }
-    public void SaveInfoHPOnly()
-    {
-        SaveData data = new SaveData();
-        data.hp = currentHp;
-        //data.playerPos = playerCurrentPosi;
+        PlayerData data = new PlayerData();
+        data.hp = currentHpData;
+        data.playerPos = currentPosiData;
 
         string json = JsonUtility.ToJson(data);
 
@@ -73,8 +57,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void SaveDataHpOnly(int HP)
+    {
+        PlayerData data = new PlayerData();
+        data.hp = HP;
+        string json = JsonUtility.ToJson(data);
 
-
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
     public void LoadPlayerInfo()
     {
         string path = Application.persistentDataPath + "/savefile.json";
@@ -82,11 +72,17 @@ public class GameManager : MonoBehaviour
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
             playerCurrentPosi = data.playerPos;
             currentHp = data.hp;
+            playerName = data.playerName;
+            
+            string jsonStr = JsonUtility.ToJson(data);
+            Debug.Log(jsonStr);
         }
 
-        
+
     }
+
+
 }

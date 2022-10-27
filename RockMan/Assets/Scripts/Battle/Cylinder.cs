@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cylinder : MonoBehaviour
+public class Cylinder : MonoBehaviour, IDamaged
 {
 
-    public static int damage = 20;
+    private int damage = 20;
     // Start is called before the first frame update
     void Update()
     {
@@ -23,5 +23,10 @@ public class Cylinder : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void DamageToPlayer()
+    {
+        PlayerBattleContoroller.Instance.hp -= damage;
     }
 }

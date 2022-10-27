@@ -7,6 +7,8 @@ public class BattleManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public List<GameObject> enemyLists = new List<GameObject>();
+    [SerializeField] GameObject player;
+    [SerializeField] Canvas GameOverText;
 
     public static BattleManager Instance;
 
@@ -18,15 +20,27 @@ public class BattleManager : MonoBehaviour
     void Update()
     {
         battleFinished();
+        GameOver();
     }
 
     public void battleFinished()
     {
         if (enemyLists.Count == 0 )
         {
-            Debug.Log("BattleFinished");
-            GameManager.Instance.SaveInfoHPOnly();
+            GameManager.Instance.currentHp = PlayerBattleContoroller.Instance.hp;
+            //GameManager.Instance.SaveInfoHPOnly();
             SceneManager.LoadScene(1);
         }
+    }
+
+    public void GameOver()
+    {
+         if (PlayerBattleContoroller.Instance.hp <= 0)
+         {
+            player.gameObject.SetActive(false);
+            GameOverText.gameObject.SetActive(true);
+            Time.timeScale = 0;
+         }
+        
     }
 }

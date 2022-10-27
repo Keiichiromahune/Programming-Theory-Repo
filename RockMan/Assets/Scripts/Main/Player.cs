@@ -9,12 +9,13 @@ public class Player : MonoBehaviour
     public static Player Instance;
 
 
-    private int hp;
+    public int hp;
     private string playerName;
     [SerializeField] TMP_Text playerNameText;
     [SerializeField] TMP_Text hp_Text;
     private Animator playerAnim;
     public Vector3 placeHere;
+    [SerializeField] GameObject clearPanel;
 
     private void Awake()
     {
@@ -23,8 +24,11 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-
-        //playerName = GameManager.Instance.playerName;
+        playerName = GameManager.Instance.playerName;
+        transform.position = GameManager.Instance.playerCurrentPosi;
+        hp = GameManager.Instance.currentHp;
+        hp_Text.text = "HP: " + hp.ToString();
+        playerNameText.text = playerName;
         playerAnim = GetComponent<Animator>();
     }
 
@@ -32,7 +36,6 @@ public class Player : MonoBehaviour
     {
         placeHere = transform.position;
         playerNameText.text = playerName;
-        hp_Text.text = "HP: " + hp.ToString();
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector3.forward * Time.deltaTime * 10);
@@ -48,8 +51,11 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.CompareTag("EnemyObj"))
         {
-            GameManager.Instance.LoadPlayerInfo();
+            //データを保存してシーン移動
             SceneManager.LoadScene(2);
+        }else if (collision.collider.CompareTag("GameClear"))
+        {
+            clearPanel.SetActive(true);
         }
 
     }
