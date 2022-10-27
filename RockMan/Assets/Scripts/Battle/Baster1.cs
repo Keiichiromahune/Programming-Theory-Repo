@@ -18,6 +18,7 @@ public class Baster1 : Baster
         MoveBaster(50);
     }
 
+    // POLYMORPHISM
     public override void MoveBaster(float velosity)
     {
         base.MoveBaster(velosity);

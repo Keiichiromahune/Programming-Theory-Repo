@@ -12,6 +12,8 @@ public class MoveScene : MonoBehaviour
 {
 
     private string m_PlayerName;
+
+    // ENCAPSULATION
     public string playerName
     {
         get { return m_PlayerName; }

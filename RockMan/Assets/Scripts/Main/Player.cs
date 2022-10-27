@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(2);
         }else if (collision.collider.CompareTag("GameClear"))
         {
+            Time.timeScale = 0;
             clearPanel.SetActive(true);
         }
 

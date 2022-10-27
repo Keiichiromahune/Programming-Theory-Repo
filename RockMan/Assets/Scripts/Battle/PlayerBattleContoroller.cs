@@ -16,8 +16,11 @@ public class PlayerBattleContoroller : MonoBehaviour
     public  float positionY;
     public GameObject baster;
     public GameObject baster1;
+    private bool baster1bool;
+    [SerializeField] GameObject baster1Text;
     public TMP_Text playerHp;
     private float waitTime = 0;
+    private float waitTime2 = 0;
 
 
     public static PlayerBattleContoroller Instance;
@@ -45,7 +48,15 @@ public class PlayerBattleContoroller : MonoBehaviour
         {
             MovePlayer();
             Baster();
+            waitTime2 += Time.deltaTime;
+            if(waitTime2 >= 5.0f)
+            {
+                baster1bool = true;
+                baster1Text.SetActive(true);
+                waitTime2 = 0;
+            }
         }
+
     }
 
 
@@ -79,9 +90,11 @@ public class PlayerBattleContoroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(baster, new Vector3(transform.position.x, 1,transform.position.z), Quaternion.identity);
-        }else if (Input.GetKeyDown(KeyCode.S))
+        }else if (Input.GetKeyDown(KeyCode.S) && baster1bool)
         {
             Instantiate(baster1, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+            baster1Text.SetActive(false);
+            baster1bool = false;
         }
     }
 
